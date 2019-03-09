@@ -38,47 +38,21 @@
  */
 package com.dariawan.jdk8.optional;
 
-import java.time.LocalDate;
-import java.util.Optional;
-import lombok.ToString;
+public class OrElseThrowExample {
 
-@ToString
-public class Employee {
+    public static void main(String[] args) {
 
-    private Integer id;
-    private String name;
-    private LocalDate birthDate;
-    private Optional<Department> department = Optional.empty();
+        Employee emp = new Employee();
+        Department dept = emp.getDepartment().orElseThrow(IllegalStateException::new);
+        System.out.println(dept);
+        
+        /*
+        Employee emp = new Employee();
+        Optional<Department> od = emp.getDepartment();
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Optional<Department> getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = Optional.of(department);
+        if (!od.isPresent()) {
+            throw new IllegalStateException();
+        }
+        */
     }
 }

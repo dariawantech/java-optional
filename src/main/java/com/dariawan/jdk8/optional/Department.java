@@ -61,4 +61,12 @@ public class Department {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Department() {
+    }
+    
+    public Department(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

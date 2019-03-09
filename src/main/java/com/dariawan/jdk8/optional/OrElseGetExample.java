@@ -38,47 +38,16 @@
  */
 package com.dariawan.jdk8.optional;
 
-import java.time.LocalDate;
-import java.util.Optional;
-import lombok.ToString;
+public class OrElseGetExample {
 
-@ToString
-public class Employee {
-
-    private Integer id;
-    private String name;
-    private LocalDate birthDate;
-    private Optional<Department> department = Optional.empty();
-
-    public Integer getId() {
-        return id;
+    static Department getNewDepartment() {
+        return new Department(999, "Others");
     }
+    
+    public static void main(String[] args) {
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Optional<Department> getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = Optional.of(department);
+        Employee emp = new Employee();
+        Department dept = emp.getDepartment().orElseGet(() -> getNewDepartment());
+        System.out.println(dept);
     }
 }
