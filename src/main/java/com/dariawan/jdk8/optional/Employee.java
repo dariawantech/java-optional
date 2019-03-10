@@ -48,26 +48,26 @@ public class Employee {
     private Integer id;
     private String name;
     private LocalDate birthDate;
-    private Optional<Department> department = Optional.empty();
+    private Department department;
 
-    public Integer getId() {
-        return id;
+    public Optional<Integer> getId() {
+        return Optional.ofNullable(id);
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Optional<String> getName() {
+        return Optional.ofNullable(name);
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public Optional<LocalDate> getBirthDate() {
+        return Optional.ofNullable(birthDate);
     }
 
     public void setBirthDate(LocalDate birthDate) {
@@ -75,10 +75,10 @@ public class Employee {
     }
 
     public Optional<Department> getDepartment() {
-        return department;
+        return Optional.ofNullable(department);
     }
 
     public void setDepartment(Department department) {
-        this.department = Optional.of(department);
+        this.department = department;
     }
 }

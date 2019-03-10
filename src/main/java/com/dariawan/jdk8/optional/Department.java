@@ -38,6 +38,7 @@
  */
 package com.dariawan.jdk8.optional;
 
+import java.util.Optional;
 import lombok.ToString;
 
 @ToString
@@ -46,16 +47,16 @@ public class Department {
     private Integer id;
     private String name;
 
-    public Integer getId() {
-        return id;
+    public Optional<Integer> getId() {
+        return Optional.ofNullable(id);
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Optional<String> getName() {
+        return Optional.ofNullable(name);
     }
 
     public void setName(String name) {

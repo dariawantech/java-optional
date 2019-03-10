@@ -40,30 +40,40 @@ package com.dariawan.jdk8.optional;
 
 import java.util.Optional;
 
-public class MapExample {
-    
+public class FlatMapExample {
+
     public static void main(String[] args) {
+        /*
+        Employee emp = new Employee();
+        emp.setId(1);
+        emp.setName("Bruce Wayne");
+        emp.setBirthDate(LocalDate.of(1973, Month.JULY, 23));
+
+        Optional<Employee> oe = Optional.of(emp);
+
+        Optional<Integer> oi = oe.flatMap(Employee::getId);
+        System.out.println("Id: " + oi.get());
+
+        String on = oe.flatMap(Employee::getName)
+                .orElse("Unknown");
+        System.out.println("Name: " + on);
+
+        Optional<LocalDate> ob = oe.flatMap(Employee::getBirthDate);
+        System.out.println("BirthDate: " + ob.get());
+
+        Department dept = oe.flatMap(Employee::getDepartment)
+                .orElse(new Department(999, "Others"));
+        System.out.println("Department: " + dept);
+        */
+        
         Employee emp = new Employee();
         emp.setDepartment(new Department(555, "Digital Transformation"));
-        
-        /*
-        Optional<Department> od = emp.getDepartment();
-        Optional<String> name = od.map(Department::getName);
-        System.out.println("Department name: " + name);
-        */
-        Optional<Department> od = emp.getDepartment();
-        Optional<Optional<String>> on = od.map(Department::getName);
-        System.out.println("Department name: " + on.get());
-        
-        Optional<String> optName = Optional.ofNullable(null);
-        System.out.println("Map value: " + optName.map(String::toUpperCase));
-        
-        optName = Optional.of("Fintech");
-        System.out.println("Map value: " + optName.map(String::toUpperCase));
-        
-        Optional<Department> dept = Optional.of(new Department(10, "IT"));
-        dept.map(Department::getName)
-                .filter(nm -> "IT".equals(nm))
-                .ifPresent(v -> System.out.println("From IT Department"));
+
+        Optional<Employee> oe = Optional.of(emp);
+        String deptName = oe.flatMap(Employee::getDepartment)
+                   .flatMap(Department::getName)
+                   .map(String::toUpperCase)
+                   .orElse("UNKNOWN");
+        System.out.println(deptName);
     }
 }
