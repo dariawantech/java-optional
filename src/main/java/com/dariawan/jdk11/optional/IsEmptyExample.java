@@ -36,30 +36,30 @@
  *   https://creativecommons.org/licenses/by-sa/4.0/
  *   https://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-package com.dariawan.jdk10.optional;
+package com.dariawan.jdk11.optional;
 
 import com.dariawan.jdk9.optional.Student;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 
-public class GetExample {
-
+public class IsEmptyExample {
+    
     public static void main(String[] args) {
-
-        List<Optional<Student>> students = Arrays.asList(
-                Optional.of(new Student(101, "Reed Richards")),
-                Optional.of(new Student(102, "Susan Storm")),
-                Optional.of(new Student(103, "Johnny Storm")),
-                Optional.of(new Student(104, "Ben Grimm"))
-        );
+        Student student = new Student(100, "Carol Danvers");
+        student.setBirthDate(LocalDate.of(1989, Month.OCTOBER, 1));
         
-        Optional<Student> od = students.stream()
-                .filter(Optional::isPresent)
-                .filter(o -> o.get().getId().isPresent())
-                .filter(o -> o.get().getId().get() == 105)
-                .findAny()
-                .get();
-        System.out.println(od);
+        Optional<Student> os = Optional.of(student);
+        boolean bornBefore90s = !os.orElseThrow(IllegalStateException::new)
+                .getBirthDate()
+                .filter(bd -> bd.getYear() > 1990)
+                .isPresent();
+        System.out.println(bornBefore90s);
+        
+        bornBefore90s = os.orElseThrow(IllegalStateException::new)
+                .getBirthDate()
+                .filter(bd -> bd.getYear() > 1990)
+                .isEmpty();
+        System.out.println(bornBefore90s);
     }
 }
