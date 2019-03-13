@@ -55,10 +55,9 @@ public class StreamExample {
                 .collect(Collectors.toList());
         System.out.println(list1);
 
-        Student nullStudent = null;
         List<Optional<Student>> otherStudents = new ArrayList<>();
         otherStudents.addAll(students);
-        otherStudents.addAll(Arrays.asList(Optional.ofNullable(nullStudent)));
+        otherStudents.addAll(Arrays.asList(Optional.empty()));
 
         List<Student> list2 = otherStudents.stream()
                 .filter(Optional::isPresent)
